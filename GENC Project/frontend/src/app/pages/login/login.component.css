@@ -1,0 +1,15 @@
+.container{
+    padding-top: 20px;
+}
+
+form{
+    border: 5px solid rgb(90, 73, 241);
+    margin: 0% 30%;
+    border-radius: 10px;
+    min-width: 250px;
+    box-sizing: border-box;
+    padding: 10px;
+}
+label,input{
+    margin-top: 10px;
+}

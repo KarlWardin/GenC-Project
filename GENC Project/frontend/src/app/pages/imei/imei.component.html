@@ -1,0 +1,12 @@
+<div>
+  <label>Account No</label>
+  <input #accountInpEl type="text" />
+  <button (click)="getDevices()">Get All the Numbers</button>
+  <button (click)="sendToLogIn()">Log In</button>
+  <div *ngIf="devices.length>0">
+    <h4>All the numbers associated with this Account No</h4>
+    <div *ngFor="let mobileNo of devices">
+      <app-card [mobileNo]="mobileNo" [accountNo]="accountInpEl.value"></app-card>
+    </div>
+  </div>
+</div>

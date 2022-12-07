@@ -1,0 +1,12 @@
+<div class="container">
+    <p>Please log in to Continue !!!</p>
+    <form #userForm="ngForm" (ngSubmit)="onLogin(userForm)">
+        <label for="accountNo">Account No</label><br>
+        <input name="accountNo" id="accountNo" type="text" class="form-control" ngModel required /><br>
+        <label for="password">Password</label><br>
+        <input name="password" id="password" type="password" class="form-control" ngModel required/><br>
+        <input type="reset" />
+        <button name="submit" type="submit" >Log In</button>
+        <button (click)="sendToHome()">Back</button>
+    </form>
+</div>
