@@ -26,28 +26,60 @@ class MobileDeviceServiceTest {
 	private AuthFeign authFeign;
 	@Mock
 	private MobileDeviceRepository mdRepo;
-	
-	@BeforeEach
-	void before() {
+
+	@Test
+	void testGetIMEINoByMobileNoAuthorized() throws NotFoundException, InvalidTokenException {
 		when(authFeign.getValidity("token", "accNo")).thenReturn("true");
-	}
-
-	@Test
-	void testGetIMEINoByMobileNo() throws NotFoundException, InvalidTokenException {
-		MobileDevice md = new MobileDevice("accNo","9999999968","dummy7");
+		MobileDevice md = new MobileDevice("accNo", "9999999968", "dummy7");
 		when(mdRepo.getById("9999999968")).thenReturn(md);
-		String res = mdService.getIMEINoByMobileNo("9999999968", "accNo", "token");
-		assertEquals("dummy7",res);
+		try {
+			String res = mdService.getIMEINoByMobileNo("9999999968", "accNo", "token");
+			assertEquals("dummy7", res);
+		} catch (Exception e) {
+			fail("not working with correct data");
+		}
 	}
 
 	@Test
-	void testGetMobileDevicesByAccountNo() throws NotFoundException, InvalidTokenException {
+	void testGetIMEINoByMobileNoUnAuthorized() {
+		when(authFeign.getValidity("token", "accNo")).thenReturn("false");
+		MobileDevice md = new MobileDevice("accNo", "9999999968", "dummy7");
+		when(mdRepo.getById("9999999968")).thenReturn(md);
+		try {
+			mdService.getIMEINoByMobileNo("9999999968", "accNo", "token");
+			fail("Working with invalid token");
+		} catch (Exception e) {
+			assert (e instanceof InvalidTokenException);
+		}
+	}
+
+	@Test
+	void testGetMobileDevicesByAccountNoAuthorized() throws NotFoundException, InvalidTokenException {
+		when(authFeign.getValidity("token", "accNo")).thenReturn("true");
 		List<String> dummyls = new ArrayList<>();
 		dummyls.add("9999999968");
 		dummyls.add("9999999963");
 		when(mdRepo.findAllByAccountNo("accNo")).thenReturn(dummyls);
-		List<String> res = mdService.getMobileDevicesByAccountNo("accNo", "token");
-		assertEquals(dummyls,res);
+		try {
+			List<String> res = mdService.getMobileDevicesByAccountNo("accNo", "token");
+			assertEquals(dummyls, res);
+		} catch (Exception e) {
+			fail("not working with correct data");
+		}
 	}
 
+	@Test
+	void testGetMobileDevicesByAccountNoUnAuthorized() throws NotFoundException, InvalidTokenException {
+		when(authFeign.getValidity("token", "accNo")).thenReturn("false");
+		List<String> dummyls = new ArrayList<>();
+		dummyls.add("9999999968");
+		dummyls.add("9999999963");
+		when(mdRepo.findAllByAccountNo("accNo")).thenReturn(dummyls);
+		try {
+			mdService.getMobileDevicesByAccountNo("accNo", "token");
+			fail("working with invalid token");
+		} catch (Exception e) {
+			assert (e instanceof InvalidTokenException);
+		}
+	}
 }

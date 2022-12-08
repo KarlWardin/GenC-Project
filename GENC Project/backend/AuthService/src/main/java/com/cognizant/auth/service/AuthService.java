@@ -2,6 +2,8 @@ package com.cognizant.auth.service;
 
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,9 +21,10 @@ public class AuthService implements UserDetailsService {
 	private AuthRepository authRepo;
 	@Autowired
 	private JwtUtil jwtUtil;
+	Logger logger = LoggerFactory.getLogger(AuthService.class);
 
 	public String login(UserData user) {
-		System.out.print(user);
+		logger.trace(user.toString());
 		try {
 			final UserDetails userDetails = loadUserByUsername(user.getAccountNo());
 			if (userDetails.getPassword().equals(user.getPassword())) {
@@ -31,6 +34,7 @@ public class AuthService implements UserDetailsService {
 				return "Incorrect Credentials";
 			}
 		} catch (Exception e) {
+			logger.error(e.getMessage());
 			return "Incorrect Credentials " + e.getMessage();
 		}
 	}
@@ -41,11 +45,12 @@ public class AuthService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String accountNo) throws UsernameNotFoundException {
-		System.out.print(accountNo);
+		logger.trace(accountNo);
 		try {
 			UserData user = (UserData) authRepo.findById(accountNo).orElse(null);
 			return new User(user.getAccountNo(), user.getPassword(), new ArrayList<>());
 		} catch (Exception e) {
+			logger.error(e.getMessage());
 			throw new UsernameNotFoundException("User Not Found");
 		}
 	}

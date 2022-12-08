@@ -1,5 +1,7 @@
 package com.cognizant.auth.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +26,15 @@ public class AuthController {
 	@Autowired
 	private AuthService authService;
 
+	Logger logger = LoggerFactory.getLogger(AuthController.class);
+
 	// returns jwt token
 	@ApiOperation(value = "Verify the Credentials and generate Jwt Token", response = ResponseEntity.class)
 	@PostMapping("/login")
 	public ResponseEntity<Object> login(@RequestBody UserData userData) {
-		System.out.print(userData);
+		logger.trace(userData.toString());
 		String token = authService.login(userData);
-		System.out.print(token);
+		logger.trace(token);
 		return new ResponseEntity<>(token, HttpStatus.OK);
 	}
 
@@ -41,6 +45,7 @@ public class AuthController {
 			@RequestParam String accountNo) {
 		String token = jwtToken.substring(7); // jwtToken = "Bearer " + token
 		Boolean isValid = authService.validate(token, accountNo);
+		logger.trace(token + " is " + isValid);
 		return new ResponseEntity<>(isValid, HttpStatus.OK);
 	}
 }

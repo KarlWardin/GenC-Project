@@ -19,7 +19,7 @@ public class SwaggerConfig {
 	}
 	
 	private ApiInfo ApiInfo() {
-		return new ApiInfoBuilder().title("Authorization Service").description("Authorization API")
+		return new ApiInfoBuilder().title("Authentication Service").description("Authentication API for Case study GenC project ")
 				.version("2.7").build();
 	}
 }

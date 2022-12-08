@@ -2,6 +2,8 @@ package com.cognizant.account.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,8 @@ public class MobileDeviceServiceImpl implements MobileDeviceService {
 	@Autowired
 	private MobileDeviceRepository mdRepo;
 	@Autowired
-	private AuthFeign authFeign; 
+	private AuthFeign authFeign;
+	Logger logger = LoggerFactory.getLogger(MobileDeviceServiceImpl.class);
 
 	@Override
 	public String getIMEINoByMobileNo(final String mobileNo, final String accountNo, final String token)
@@ -25,9 +28,11 @@ public class MobileDeviceServiceImpl implements MobileDeviceService {
 			try {
 				return mdRepo.getById(mobileNo).getImeiNo();
 			} catch (Exception e) {
+				logger.error(e.getMessage());
 				throw new NotFoundException(e.getMessage());
 			}
 		}
+		logger.error("account not logged in");
 		throw new InvalidTokenException("Account Not Logged In !!");
 	}
 
@@ -38,9 +43,11 @@ public class MobileDeviceServiceImpl implements MobileDeviceService {
 			try {
 				return mdRepo.findAllByAccountNo(accountNo);
 			} catch (Exception e) {
+				logger.error(e.getMessage());
 				throw new NotFoundException(e.getMessage());
 			}
 		}
+		logger.error("Account not logged in");
 		throw new InvalidTokenException("Account Not Logged In !!");
 
 	}
