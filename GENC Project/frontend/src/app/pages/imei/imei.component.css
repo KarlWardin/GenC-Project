@@ -1,0 +1,51 @@
+.imeiComp{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form{
+    border: 5px solid blue;
+    padding: 10px;
+    border-radius: 5px;
+    background: linear-gradient(blue,white);
+    font-size: large;
+    font-weight: bolder;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+.no-background{
+    background: none;
+}
+.form input{
+    border-radius: 5px;
+    font-size: large;
+    font-weight: bold;
+    padding: 5px;
+    text-align: start!important;
+}
+.form button{
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: bold;
+    font-size: large;
+}
+.margin-top-10px{
+    margin-top: 10px;
+}
+.cardsGrp{
+    display: flex;
+    flex-direction: column;
+    border: 5px solid blue;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.cardsGrp h4{
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    margin-top: 0px;
+    font-size: large;
+}

@@ -1,12 +1,16 @@
-<div>
-  <label>Account No</label>
-  <input #accountInpEl type="text" />
-  <button (click)="getDevices()">Get All the Numbers</button>
-  <button (click)="sendToLogIn()">Log In</button>
-  <div *ngIf="devices.length>0">
+<div class="imeiComp">
+  <div class="form">
+    <label class="no-background">Account No</label>
+    <input class="margin-top-10px" type="text" [(ngModel)]="accountNo" />
+    <div class="margin-top-10px no-background">
+      <button (click)="getDevices()">Get All the Numbers</button>
+      <button (click)="sendToLogIn()">Log In</button>
+    </div>
+  </div>
+  <div class="cardsGrp" *ngIf="devices.length>0">
     <h4>All the numbers associated with this Account No</h4>
     <div *ngFor="let mobileNo of devices">
-      <app-card [mobileNo]="mobileNo" [accountNo]="accountInpEl.value"></app-card>
+      <app-card [mobileNo]="mobileNo" [accountNo]="accountNo"></app-card>
     </div>
   </div>
 </div>

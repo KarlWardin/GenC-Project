@@ -11,7 +11,7 @@ import { User } from 'src/app/model/user';
 })
 export class LoginComponent implements OnInit {
   userDetails: User = {
-    accountNo: "",
+    accountNo: localStorage.getItem("mpCurrentAccNo") || "",
     password: ""
   }
 

@@ -10,7 +10,7 @@ export class CardComponent implements OnInit {
 
   @Input() mobileNo = '';
   @Input() accountNo = '';
-  imeiNo: any;
+  imeiNo: string = "Get IMEI No";
 
   constructor(private deviceService: DeviceService) { }
 
@@ -23,7 +23,8 @@ export class CardComponent implements OnInit {
         this.imeiNo = response;
       },
       (error) => {                              //error() callback
-        alert(error);
+        alert("Some problem occured. Please recheck if you are logged in !!");
+        console.log(error);
       },
       () => { });                                  //complete() callbac
   }

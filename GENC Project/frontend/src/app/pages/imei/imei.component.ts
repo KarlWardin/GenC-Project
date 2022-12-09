@@ -11,26 +11,28 @@ export class ImeiComponent implements OnInit {
 
   @ViewChild('accountInpEl') accountInpEl: ElementRef | undefined;
   devices: string[] = [];
+  accountNo: string = localStorage.getItem("mpCurrentAccNo") || "";
 
-  constructor(private deviceService: DeviceService,private route: Router) { }
+  constructor(private deviceService: DeviceService, private route: Router) { }
 
   ngOnInit(): void {
   }
 
   getDevices() {
-    const accountNo: string = this.accountInpEl!.nativeElement.value;
-    console.log(accountNo);
-    this.deviceService.getMobileNO(accountNo).subscribe(
+    console.log(this.accountNo);
+    this.deviceService.getMobileNO(this.accountNo).subscribe(
       (response) => {                           //next() callback
-        console.log(response)
+        console.log(response);
         this.devices = response;
       },
       (error) => {                              //error() callback
-        alert(error);
+        console.log(error);
       },
-      () => { });                                //complete() callback
-
-    //console.log(this.devices);
+      () => {
+        if (this.devices.length === 0) {
+          alert("Recheck the Account no or Login again");
+        }
+      });                                //complete() callback
   }
 
   sendToLogIn() {

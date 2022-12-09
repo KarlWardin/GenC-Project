@@ -1,5 +1,4 @@
-<div>
+<div class="card">
     <span>{{mobileNo}}</span>
-    <button (click)="getImeiNo()">Get IMEI No</button>
-    <span>{{imeiNo}}</span>
+    <button [disabled]="imeiNo!=='Get IMEI No'" (click)="getImeiNo()">{{imeiNo}}</button>
 </div>

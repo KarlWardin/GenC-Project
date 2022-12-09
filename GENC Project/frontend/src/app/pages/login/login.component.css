@@ -1,15 +1,45 @@
 .container{
     padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container span{
+    background-color: blue;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    padding: 10px 30px;
+    border-radius: 10px;
 }
 
 form{
-    border: 5px solid rgb(90, 73, 241);
-    margin: 0% 30%;
+    border: 5px solid blue;
+    margin-top: 20px;
     border-radius: 10px;
-    min-width: 250px;
-    box-sizing: border-box;
-    padding: 10px;
+    padding: 20px;
+    font-size: large;
+    font-weight: bold;
+    background: linear-gradient(blue,white)
 }
-label,input{
-    margin-top: 10px;
+form label{
+    background: none;
+}
+.mgt-10px{
+    margin-top: 20px;
+}
+.btn{
+   background-color: blue;
+   color: white;
+   font-size: large;
+   font-weight: bold;
+   border-radius: 5px;
+   margin: 10px;
+   padding: 5px;
+}
+.inp{
+   text-align: start;
+   font-size: large;
+   font-weight: bold;
+   padding: 5px;
 }
