@@ -4,7 +4,7 @@
     <input class="margin-top-10px" type="text" [(ngModel)]="accountNo" />
     <div class="margin-top-10px no-background">
       <button (click)="getDevices()">Get All the Numbers</button>
-      <button (click)="sendToLogIn()">Log In</button>
+      <button id="loginBtn" (click)="sendToLogIn()">Log In</button>
     </div>
   </div>
   <div class="cardsGrp" *ngIf="devices.length>0">

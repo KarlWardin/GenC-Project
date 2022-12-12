@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DeviceService } from 'src/app/device/device.service';
 
 import { CardComponent } from './card.component';
 
@@ -8,9 +10,11 @@ describe('CardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CardComponent ]
+      imports: [HttpClientTestingModule],
+      providers: [DeviceService],
+      declarations: [CardComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(CardComponent);
     component = fixture.componentInstance;

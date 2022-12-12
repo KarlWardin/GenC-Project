@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class DeviceService {
 
-  deviceApi: string = "http://localhost:8080/";
+  private deviceApi: string = "http://localhost:8080/";
 
   constructor(private http: HttpClient) { }
 

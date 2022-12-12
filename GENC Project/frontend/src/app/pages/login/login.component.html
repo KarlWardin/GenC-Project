@@ -2,11 +2,11 @@
     <span>Please log in to Continue !!!</span>
     <form #userForm="ngForm" (ngSubmit)="onLogin(userForm)">
         <label class="mgt-10px" for="accountNo">Account No</label><br>
-        <input name="accountNo" id="accountNo" type="text" class="inp form-control" ngModel required /><br>
+        <input name="accountNo" id="accountNo" type="text" class="inp form-control" value="" ngModel required /><br>
         <label class="mgt-10px" for="password">Password</label><br>
-        <input name="password" id="password" type="password" class="inp form-control" ngModel required/><br>
-        <input class="btn" type="reset" />
-        <button class="btn" name="submit" type="submit" >Log In</button>
-        <button class="btn" (click)="sendToHome()">Back</button>
+        <input name="password" id="password" type="password" class="inp form-control" value="" ngModel required/><br>
+        <input id="resetBtn" class="btn" type="reset" />
+        <button id="submitBtn" class="btn" name="submit" type="submit" >Log In</button>
+        <button id="backBtn" class="btn" (click)="sendToHome()">Back</button>
     </form>
 </div>
