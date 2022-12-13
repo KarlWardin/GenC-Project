@@ -36,11 +36,25 @@ describe('ImeiComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('#sendToLogIn check', () => {
+  it('#getDevices check',fakeAsync(()=>{
+    const testData =  ["1234567890", "9673926301"];
+    let button = fixture.debugElement.nativeElement.querySelector('#getDevicesBtn');
+    let accountNoInput = fixture.debugElement.nativeElement.querySelector('#accountNo');
+    accountNoInput.value = "test";
+    accountNoInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    button.click();
+    tick();
+    const req = httpTestingController.expectOne('http://localhost:8080/getMobileNo?accountNo=test');
+    expect(req.request.method).toEqual('GET');
+    req.flush(testData);
+  }));
+  it('#sendToLogIn check', fakeAsync(() => {
     const navigateSpy = spyOn(router, 'navigate');
     let button = fixture.debugElement.nativeElement.querySelector('#loginBtn');
     button.click();
+    tick();
     //component.sendToLogIn();
     expect(navigateSpy).toHaveBeenCalledWith(['/login']);
-  });
+  }));
 });

@@ -1,9 +1,9 @@
 <div class="imeiComp">
   <div class="form">
     <label class="no-background">Account No</label>
-    <input class="margin-top-10px" type="text" [(ngModel)]="accountNo" />
+    <input id="accountNo" class="margin-top-10px" type="text" [(ngModel)]="accountNo" />
     <div class="margin-top-10px no-background">
-      <button (click)="getDevices()">Get All the Numbers</button>
+      <button id="getDevicesBtn" (click)="getDevices()">Get All the Numbers</button>
       <button id="loginBtn" (click)="sendToLogIn()">Log In</button>
     </div>
   </div>
